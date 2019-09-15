@@ -4,6 +4,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
+const User = require('./user');
 
 const API_PORT = 3001;
 const app = express();
@@ -59,27 +60,32 @@ router.delete('/deleteData', (req, res) => {
   });
 });
 
-// this is our create methid
+// this is our create method
 // this method adds new data in our database
-router.post('/putData', (req, res) => {
-  let data = new Data();
-
-  const { id, message } = req.body;
-  console.log(id);
-  console.log(message);
-
-  if ((!id && id !== 0) || !message) {
-    return res.json({
-      success: false,
-      error: 'INVALID INPUTS',
+router.post('/putUser', (req, res) => {
+  let user = new User();
+  const { userid, phone, mail } = req.body;
+  user.userid = userid;
+  user.phone = phone;
+  user.mail = mail;
+  User.find({userid : user.userid},(err, u) => {
+    if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
+    if (u.length) return res.json({ success: false, message: "您已参加过此活动" });
+    user.save((err) => {
+      if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
+      User.countDocuments({}, function (err, c) {
+        if (err) return res.json({ success: true, message: "提交成功，获奖情况将以电邮或电话通知您", err: err });
+        console.log('Count is ' + c);
+        return res.json({ success: true, message: `提交成功，您的排名是${c},获奖情况将以电邮或电话通知您` });
+      });
     });
-  }
-  data.id = id;
-  data.message = message;
-  
-  data.save((err) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
+  });
+});
+
+router.get('/getCount', (req, res) => {
+  Data.countDocuments({}, function (err, c) {
+    console.log('Count is ' + c);
+    return res.json({ success: true, count: c });
   });
 });
 
