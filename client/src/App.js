@@ -8,7 +8,8 @@ class App extends Component {
       cookie: document.cookie,
       // cookie: "a=b;c=d;userId=123;e=f",
       phone: "",
-      mail:""
+      mail:"",
+      message:""
     };
     this.getUserId = this.getUserId.bind(this);
   }
@@ -26,7 +27,7 @@ class App extends Component {
       mail: mail,
     }).then(
       (res) => {
-        let a = res.data;
+        this.setState({message:res.data.message});
       }
       );
   };
@@ -62,6 +63,7 @@ class App extends Component {
             placeholder="电邮"
             style={{ width: '200px' }}
           />
+          <div>{this.state.message}</div>
           <button onClick={() => this.putDataToDB(userId,this.state.phone,this.state.mail)}>
             ADD
           </button>
