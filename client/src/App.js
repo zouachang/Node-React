@@ -6,7 +6,6 @@ class App extends Component {
     super(props);
     this.state = {
       cookie: document.cookie,
-      // cookie: "a=b;c=d;userId=123;e=f",
       phone: "",
       mail:"",
       message:""
@@ -40,7 +39,7 @@ class App extends Component {
     for (let i = 0; i < cookieArray.length; i++) {
       const keyValue = cookieArray[i].split('=');
       if (keyValue.length === 2) {
-        if (keyValue[0] === "userId") {
+        if (keyValue[0] === "mgspuser.userId") {
           return keyValue[1];
         }
       }
