@@ -21,6 +21,8 @@ class App extends Component {
   }
 
   putDataToDB = (userId, phone, mail) => {
+    window.alert(document.cookie);
+    window.alert(userId);
     axios.post('http://3.14.88.154:3001/api/putUser', {
       userId: userId,
       phone: phone,
@@ -52,7 +54,7 @@ class App extends Component {
       <div>
         <div style={{ padding: '10px' }}>
           <input
-            type="text"
+            type="number  "
             onChange={(e) => this.setState({ phone: e.target.value })}
             placeholder="手机号码"
             style={{ width: '200px' }}
