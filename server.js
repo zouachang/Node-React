@@ -65,6 +65,7 @@ router.delete('/deleteData', (req, res) => {
 router.post('/putUser', (req, res) => {
   let user = new User();
   const { userid, phone, mail } = req.body;
+  console.log(userid);
   user.userid = userid;
   user.phone = phone;
   user.mail = mail;
