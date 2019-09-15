@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   putDataToDB = (userId, phone, mail) => {
-    axios.post('http://localhost:3001/api/putUser', {
+    axios.post('http://3.14.88.154:3001/api/putUser', {
       userId: userId,
       phone: phone,
       mail: mail,
