@@ -21,8 +21,6 @@ class App extends Component {
   }
 
   putDataToDB = (userId, phone, mail) => {
-    window.alert(document.cookie);
-    window.alert(userId);
     axios.post('http://3.14.88.154:3001/api/putUser', {
       userId: userId,
       phone: phone,
@@ -53,6 +51,21 @@ class App extends Component {
     const cookieArray = cookie.split(';');
     return cookieArray.map(
       (c) => {
+        const keyValue = cookieArray[i].split('=');
+        if (keyValue.length === 2) {
+          if (keyValue[0] === "mgspuser.userId") {
+            window.alert("i");
+          }
+          if (keyValue[0] === "mgspuser.userld") {
+            window.alert("L");
+          }
+          return (
+            <div>
+              <div key={keyValue[0]}>{keyValue[0]}</div>
+              <div key={keyValue[1]}>{keyValue[1]}</div>
+            </div>
+          );
+        }
         return <div key={c}>{c}</div>;
       });
   }
