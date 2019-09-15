@@ -5,8 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // cookie: document.cookie,
-      cookie: "a=b;c=d;userId=123;e=f",
+      cookie: document.cookie,
+      // cookie: "a=b;c=d;userId=123;e=f",
       phone: "",
       mail:""
     };
