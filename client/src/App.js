@@ -51,7 +51,7 @@ class App extends Component {
     const cookieArray = cookie.split(';');
     return cookieArray.map(
       (c) => {
-        const keyValue = cookieArray[i].split('=');
+        const keyValue = c.split('=');
         if (keyValue.length === 2) {
           if (keyValue[0] === "mgspuser.userId") {
             window.alert("i");
