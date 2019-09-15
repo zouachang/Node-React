@@ -11,6 +11,7 @@ class App extends Component {
       message:""
     };
     this.getUserId = this.getUserId.bind(this);
+    this.getCookieArray = this.getCookieArray.bind(this);
   }
 
   componentDidMount() {
@@ -47,10 +48,20 @@ class App extends Component {
     return "";
   }
 
+  getCookieArray = () => {
+    const { cookie } = this.state;
+    const cookieArray = cookie.split(';');
+    return cookieArray.map(
+      (c) => {
+        return <div key={c}>{c}</div>;
+      });
+  }
+
   render() {
     let userId = this.getUserId();
     return (
       <div>
+        <div>{this.getCookieArray()}</div>
         <div style={{ padding: '10px' }}>
           <input
             type="number  "
