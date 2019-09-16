@@ -54,10 +54,10 @@ class App extends Component {
         const keyValue = c.split('=');
         if (keyValue.length === 2) {
           if (keyValue[0] === "mgspuser.userId") {
-            window.alert("i");
+            return <div>mgspuser.userid get</div>;
           }
           if (keyValue[0] === "mgspuser.userld") {
-            window.alert("L");
+            return <div>userLd get</div>;
           }
           return (
             <div>
