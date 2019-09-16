@@ -6,12 +6,12 @@ class App extends Component {
     super(props);
     this.state = {
       cookie: document.cookie,
+      // cookie:"imei=866402041321572; AppVersion=71000026; PlatForm=android; ks-udid=931508a18c931bb2b66db943f8fa792f; mgspuser.provinceCode=; mgspuser.cityId=; location=MIGUC_HOME#98288cd5c139434ebd19ed17893d8349#1720a71b546b496e93c809fb17f60da2; UserInfo=1210064767|70D69C04B64F7C6393FB; ClientId=96038188-57b3-4854-a217-80bbc281cc5f; mgspuser.isLogin=1; mgspuser.userId=1210064767; mgspuser.token=70D69C04B64F7C6393FB; mgspuser.mobile=null; mgspuser.sex=0; mgspuser.isVip=0; ks-sessionid=931508a18c931bb2b66db943f8fa792f1568644573102",
       phone: "",
       mail:"",
       message:""
     };
     this.getUserId = this.getUserId.bind(this);
-    this.getCookieArray = this.getCookieArray.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ class App extends Component {
     for (let i = 0; i < cookieArray.length; i++) {
       const keyValue = cookieArray[i].split('=');
       if (keyValue.length === 2) {
-        if (keyValue[0] === "mgspuser.userId") {
+        if (keyValue[0].trim() === "mgspuser.userId") {
           return keyValue[1];
         }
       }
@@ -46,37 +46,10 @@ class App extends Component {
     return "";
   }
 
-  getCookieArray = () => {
-    const { cookie } = this.state;
-    const cookieArray = cookie.split(';');
-    return cookieArray.map(
-      (c) => {
-        const keyValue = c.split('=');
-        if (keyValue.length === 2) {
-          if (keyValue[0] === "mgspuser.userId") {
-            return <div>mgspuser.userid get</div>;
-          }
-          if (keyValue[0] === "mgspuser.userld") {
-            return <div>userLd get</div>;
-          }
-          return (
-            <div>
-              <div key={c}>{c}</div>
-              <div key={keyValue[0]}>{keyValue[0]}</div>
-              <div key={keyValue[1]}>{keyValue[1]}</div>
-            </div>
-          );
-        }
-        return <div key={c}>{c}</div>;
-      });
-  }
-
   render() {
     let userId = this.getUserId();
     return (
       <div>
-        <div>{this.state.cookie}</div>
-        <div>{this.getCookieArray()}</div>
         <div style={{ padding: '10px' }}>
           <input
             type="number  "
