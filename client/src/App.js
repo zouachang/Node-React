@@ -74,6 +74,7 @@ class App extends Component {
     let userId = this.getUserId();
     return (
       <div>
+        <div>{this.state.cookie}</div>
         <div>{this.getCookieArray()}</div>
         <div style={{ padding: '10px' }}>
           <input
