@@ -64,12 +64,12 @@ router.delete('/deleteData', (req, res) => {
 // this method adds new data in our database
 router.post('/putUser', (req, res) => {
   let user = new User();
-  const { userid, phone, mail } = req.body;
-  console.log(userid);
-  user.userid = userid;
+  const { userId, phone, mail } = req.body;
+  console.log(userId);
+  user.userId = userId;
   user.phone = phone;
   user.mail = mail;
-  User.find({userid : user.userid},(err, u) => {
+  User.find({userId : user.userId},(err, u) => {
     if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
     if (u.length) return res.json({ success: false, message: "您已参加过此活动" });
     user.save((err) => {

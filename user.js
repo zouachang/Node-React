@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // this will be our data base's data structure 
 const UserSchema = new Schema(
   {
-    userid: String,
+    userId: String,
     phone: String,
     mail: String
   },
