@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const mongoose = require('mongoose');
 const express = require('express');
 var cors = require('cors');
@@ -65,6 +66,9 @@ router.delete('/deleteData', (req, res) => {
 router.post('/putUser', (req, res) => {
   let user = new User();
   const { userId, phone, mail } = req.body;
+  if(!userId) {
+    return res.json({ success: false, message: "獲取用戶信息失敗，請聯繫客服人員處理" });
+  }
   console.log(userId);
   user.userId = userId;
   user.phone = phone;
