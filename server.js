@@ -69,7 +69,6 @@ router.post('/putUser', (req, res) => {
   if(!userId) {
     return res.json({ success: false, message: "獲取用戶信息失敗，請聯繫客服人員處理" });
   }
-  console.log(userId);
   user.userId = userId;
   user.phone = phone;
   user.mail = mail;
@@ -80,7 +79,6 @@ router.post('/putUser', (req, res) => {
       if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
       User.countDocuments({}, function (err, c) {
         if (err) return res.json({ success: true, message: "提交成功，获奖情况将以电邮或电话通知您", err: err });
-        console.log('Count is ' + c);
         return res.json({ success: true, message: `提交成功，您的排名是${c},获奖情况将以电邮或电话通知您` });
       });
     });
@@ -89,8 +87,17 @@ router.post('/putUser', (req, res) => {
 
 router.get('/getCount', (req, res) => {
   Data.countDocuments({}, function (err, c) {
-    console.log('Count is ' + c);
     return res.json({ success: true, count: c });
+  });
+});
+
+router.get('/getUser', (req, res) => {
+  User.find({}, 'userId phone mail createdAt', (err, user) => {
+    if (err) return res.json({ success: false, error: err });
+    User.countDocuments({}, function (err, c) {
+      if (err) return res.json({ success: false, error: err });
+      return res.json({ success: true, user: user, count: c });
+    });
   });
 });
 
