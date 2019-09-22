@@ -79,7 +79,7 @@ router.post('/putUser', (req, res) => {
 });
 
 router.get('/getUser', (req, res) => {
-  User.find({}, '_id userId phone mail', (err, user) => {
+  User.find({}, '_id userId phone mail createdAt', {sort: {'_id': 1}},(err, user) => {
     if (err) return res.json({ success: false, error: err });
     User.countDocuments({}, function (err, c) {
       if (err) return res.json({ success: false, error: err });
