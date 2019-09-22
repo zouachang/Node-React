@@ -70,16 +70,16 @@ router.post('/putUser', (req, res) => {
   user.mail = mail;
   User.find({userId : user.userId},(err, u) => {
     if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
-    if (u.length) return res.json({ success: false, message: "您已参加过此活动" });
+    if (u.length) return res.json({ success: false, message: "閣下已参加过此活动" });
     user.save((err) => {
       if (err) return res.json({ success: false, message: "提交失败，请稍后再试或联系客服人员", err: err});
-      return res.json({ success: true, message: `提交成功，您的排名是${user._id},获奖情况将以电邮或电话通知您` });
+      return res.json({ success: true, message: `提交成功，閣下是第${user._id}位參與用戶,获奖情况後續将以电邮或电话通知` });
     });
   });
 });
 
 router.get('/getUser', (req, res) => {
-  User.find({}, 'userId phone mail createdAt', (err, user) => {
+  User.find({}, '_id userId phone mail', (err, user) => {
     if (err) return res.json({ success: false, error: err });
     User.countDocuments({}, function (err, c) {
       if (err) return res.json({ success: false, error: err });
